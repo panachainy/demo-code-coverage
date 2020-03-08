@@ -1,0 +1,12 @@
+server:
+  servlet:
+    context-path: /demo-jacoco/
+  port: 8080
+
+spring:
+  jackson:
+    serialization:
+      indent-output: true
+
+  main:
+    allow-bean-definition-overriding: true
