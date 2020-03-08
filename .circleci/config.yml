@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      - run: mvn clean package
+      - run: mvn jacoco:report
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      - store_test_results:
+          path: target/surefire-reports
+
+      - store_artifacts:
+          path: target/agentmate-converter.jar
+
+      - store_artifacts:
+          path: target/site/jacoco/
