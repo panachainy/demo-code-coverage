@@ -9,6 +9,9 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -23,8 +26,10 @@ public class TestLogicController {
         // Action
         MvcResult result = this.mockMvc.perform(get("/exampleData/1")).andExpect(status().isOk()).andReturn();
         String messages = result.getResponse().getContentAsString();
+        ObjectMapper map = new ObjectMapper();
+        JsonNode node = map.readTree(messages);
 
         // Assert
-        assertEquals(messages, "example 1");
+        assertEquals(node.get("responseMessage").asText(), "example 1");
     }
 }
