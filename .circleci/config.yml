@@ -27,3 +27,5 @@ jobs:
 
       - store_artifacts:
           path: target/site/jacoco/
+
+      - run: bash <(curl -s https://codecov.io/bash)
