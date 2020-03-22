@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/panachainy/demo-code-coverage.svg?style=svg)](https://circleci.com/gh/panachainy/demo-code-coverage)
+
 # Command
 `./run.sh` run program.
 
